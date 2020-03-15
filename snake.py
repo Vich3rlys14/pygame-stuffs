@@ -1,6 +1,9 @@
+#!/usr/bin/python3 
+#-*-coding : utf-8 -*-
+# written with Python 3.5.2
+# author : vicherlys
 import random 
 import pygame
-import time
 from pygame.locals import *
 
 pygame.init()
@@ -21,17 +24,17 @@ def move_snake():
 	for i in range(1 ,len(snake)):
 		x = (len(snake))-i
 		snake[x] = snake[x-1].copy()
+	head_x , head_y  = snake[0]
 
 	if direction == "up" :
 		snake[0][1] -= case_size
-	elif direction == "right":
+	elif direction == "right" :
 		snake[0][0] += case_size
-	elif direction == "left":
+	elif direction == "left" an:
 		snake[0][0] -= case_size
 	elif direction == "down":
 		snake[0][1] += case_size
 	
-	head_x , head_y  = snake[0]
 	if head_x < 0 or head_x >=400 or head_y < 0 or head_y >= 400:
 		return False
 
@@ -51,8 +54,10 @@ red = 0xff0000
 screen_size = (400,400)
 snake_body = surf(black, (case_size , case_size))
 apple = surf(red, (case_size,case_size))
+
 snake = [[i*10 ,int(screen_size[0]/2)] for i in range(10)]
 snake.reverse()
+
 screen = pygame.display.set_mode(screen_size)
 title = pygame.display.set_caption("snake")
 background = surf( 0xffffff  , screen.get_size())
@@ -79,7 +84,6 @@ while not done:
 	pygame.display.update()
 	if move_snake() == False:
 		done = True
-
 
 	for event in pygame.event.get():
 		if event.type == QUIT :
